@@ -46,7 +46,7 @@ Run and get bearer token for each subscription. Save the bearer token after logg
 
    $ $bearer = (.\azlogin | jp -u -e filter.jp)
 
-   $ curl "https://management.azure.com/subscriptions/ff05d8ad-12ee-4c68-97bb-6b52efa1c92e/resourcegroups?api-version=2017-05-10" -H  "Authorization: Bearer $bearer"
+   $ curl "https://management.azure.com/subscriptions/xxxxxxxx-.../resourcegroups?api-version=2017-05-10" -H  "Authorization: Bearer $bearer"
 
 
 See
