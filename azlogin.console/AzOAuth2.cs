@@ -1,10 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿/* 
+ * Copyright 2015-2017 Takekazu Omi
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+using System;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -12,56 +25,6 @@ using Newtonsoft.Json.Serialization;
 
 namespace azlogin.console
 {
-
-    public class Subscriptions
-    {
-        [JsonProperty(PropertyName = "value")]
-        public Subscription[] Value { get; set; } = { };
-    }
-
-    public class Subscription
-    {
-        public string Id { get; set; }
-        public string SubscriptionId { get; set; }
-        public string DisplayName { get; set; }
-        public string State { get; set; }
-        public SubscriptionPolicies SubscriptionPolicies { get; set; }
-        public string AuthorizationSource { get; set; }
-    }
-
-    public class SubscriptionPolicies
-    {
-        public string LocationPlacementId { get; set; }
-        public string QuotaId { get; set; }
-        public string SpendingLimit { get; set; }
-    }
-
-    public class AuthResult
-    {
-        public string TokenType { get; set; }
-        public string Scope { get; set; }
-        public string ExpiresIn { get; set; }
-        public string ExtExpiresIn { get; set; }
-        public string ExpiresOn { get; set; }
-        public string NotBefore { get; set; }
-        public string Resource { get; set; }
-        public string AccessToken { get; set; }
-        public string RefreshToken { get; set; }
-        public string IdToken { get; set; }
-    }
-
-    public class Tenants
-    {
-        [JsonProperty(PropertyName = "value")]
-        public Tenant[] Value { get; set; } = { };
-    }
-
-    public class Tenant
-    {
-        public string Id { get; set; }
-        public string TenantId { get; set; }
-    }
-
     public class AzOAuth2
     {
         private const string OAuth2Uri = "https://login.microsoftonline.com/common/oauth2";
@@ -82,16 +45,16 @@ namespace azlogin.console
 
         private const string MediaType = "application/x-www-form-urlencoded";
 
-        private HttpClient _client;
+        private readonly HttpClient _client;
 
-        private JsonSerializerSettings _snakeSettings = new JsonSerializerSettings
+        private readonly JsonSerializerSettings _snakeSettings = new JsonSerializerSettings
         {
             ContractResolver = new DefaultContractResolver
             {
                 NamingStrategy = new SnakeCaseNamingStrategy()
             }
         };
-        private JsonSerializerSettings _camelSettings = new JsonSerializerSettings
+        private readonly JsonSerializerSettings _camelSettings = new JsonSerializerSettings
         {
             ContractResolver = new DefaultContractResolver
             {
