@@ -10,7 +10,7 @@ Usage
 
 Run and get bearer token for each subscription
 
-.. posh::
+.. code:: posh
 
    $ .\azlogin
    To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code G9HFZ4NCY to authenticate.
@@ -39,7 +39,7 @@ Run and get bearer token for each subscription
 
 Run and get bearer token for each subscription. Save the bearer token after logging in the variable and execute the API. For cutting bearer token, use jp (JMESPath).
 
-.. posh::
+.. code:: posh
 
    $ cat filter.jp
    [?subscriptionName == 'kinmugi'].bearer|[0]
